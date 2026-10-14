@@ -49,3 +49,32 @@ button {
   background: #e5e5e5;
   color: #444;
 }
+
+[hidden] { display: none !important; }
+
+input {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 1px solid #f0b6c6;
+  border-radius: 12px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+#verify {
+  background: #ff5c8a;
+  color: white;
+}
+
+#error {
+  color: #c0334f;
+  min-height: 1.2em;
+}

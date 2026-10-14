@@ -8,14 +8,31 @@
 </head>
 <body>
   <main id="card">
-    <img src="photo.jpg" alt="Our photo" id="photo">
-    <h1 id="title">Hi Her Name 💕</h1>
-    <p id="message">I have something I want to ask you...</p>
-    <h2 id="question">Will you go out with me?</h2>
-    <div id="buttons">
-      <button id="yes">Yes 💖</button>
-      <button id="no">No</button>
-    </div>
+
+    <!-- Step 1: verification -->
+    <section id="gate">
+      <h1>Hi there 💕</h1>
+      <p>This page was made for one special person. Please confirm it's you.</p>
+      <input id="f-name" type="text" placeholder="Your full name" autocomplete="off">
+      <label for="f-dob">Date of birth</label>
+      <input id="f-dob" type="date">
+      <input id="f-phone" type="tel" placeholder="Your phone number" autocomplete="off">
+      <button id="verify">Confirm</button>
+      <p id="error"></p>
+    </section>
+
+    <!-- Step 2: the question (hidden until verified) -->
+    <section id="ask" hidden>
+      <img src="photo.jpg" alt="Our photo" id="photo">
+      <h1 id="title">Hi Her Name 💕</h1>
+      <p id="message">I have something I want to ask you...</p>
+      <h2 id="question">Will you go out with me?</h2>
+      <div id="buttons">
+        <button id="yes">Yes 💖</button>
+        <button id="no">No</button>
+      </div>
+    </section>
+
   </main>
   <script src="script.js"></script>
 </body>
