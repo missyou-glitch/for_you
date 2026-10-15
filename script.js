@@ -2,9 +2,8 @@
 const SALT = "missyou2011";   // don't change this after generating the hashes
 const EXPECTED_HASHES = [
   "0332ef2bdbe1caaf7b774dc1d1d8ccf15cb1d6d3c24498f835c4fe9cbc9e850b",
-  // "PASTE_HASH_2_HERE",     // optional: another accepted spelling of the school
+  "b5483db77637c443979db7b65a267e4f7973998dbf562fe7fd3cb635ff6d2725",
 ];
-// ====================
 
 const yes = document.getElementById("yes");
 const no = document.getElementById("no");
@@ -13,8 +12,22 @@ const message = document.getElementById("message");
 const question = document.getElementById("question");
 const buttons = document.getElementById("buttons");
 
-// Turn anything typed into one simple form:
-// lowercase, no accents, no spaces or punctuation
+// ----- Sound -----
+const bgm = document.getElementById("bgm");              // Running Sky
+const sorrySong = document.getElementById("sorrysong");  // Don't Forget
+const soundBtn = document.getElementById("sound");
+let soundOn = true;
+bgm.volume = 0.5;
+sorrySong.volume = 0.5;
+
+soundBtn.addEventListener("click", () => {
+  soundOn = !soundOn;
+  bgm.muted = !soundOn;
+  sorrySong.muted = !soundOn;
+  soundBtn.textContent = soundOn ? "🔊" : "🔇";
+});
+
+// ----- Name / school cleanup and hash -----
 function simplify(text) {
   return text
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -32,12 +45,12 @@ async function makeHash(name, dob, school) {
   const buf = await crypto.subtle.digest("SHA-256", data);
   return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
 }
-window.makeHash = makeHash; // lets you generate the hash from the console
+window.makeHash = makeHash;
 
-// Verification
+// ----- Page 1: confirmation -----
 document.getElementById("verify").addEventListener("click", async () => {
   const name = document.getElementById("f-name").value;
-  const dob = document.getElementById("f-dob").value;   // format yyyy-mm-dd
+  const dob = document.getElementById("f-dob").value;
   const school = document.getElementById("f-school").value;
   const error = document.getElementById("error");
 
@@ -46,16 +59,42 @@ document.getElementById("verify").addEventListener("click", async () => {
     return;
   }
 
+  // Start the audio inside the click so phones allow it (silent for now)
+  bgm.muted = true;
+  bgm.play().catch(() => {});
+
   const hash = await makeHash(name, dob, school);
   if (EXPECTED_HASHES.includes(hash)) {
+    bgm.muted = !soundOn;                         // music becomes audible
+    soundBtn.hidden = false;                      // show the mute button
     document.getElementById("gate").hidden = true;
-    document.getElementById("ask").hidden = false;
+    document.getElementById("status").hidden = false;
   } else {
-    error.textContent = "Sorry, these details don't match. Please try again.";
+    bgm.pause();                                  // wrong answer: stop the audio
+    bgm.currentTime = 0;
+    error.textContent = "Sorry, you're not her. 💔";
   }
 });
 
-// Runaway No button
+// ----- Page 2: boyfriend question -----
+// YES: stop the main music, play the gentle song
+document.getElementById("bf-yes").addEventListener("click", () => {
+  document.getElementById("status").hidden = true;
+  document.getElementById("sorry").hidden = false;
+
+  bgm.pause();
+  sorrySong.muted = !soundOn;
+  sorrySong.currentTime = 0;
+  sorrySong.play().catch(() => {});
+});
+
+// NO: go on to the ask page; the main music keeps playing untouched
+document.getElementById("bf-no").addEventListener("click", () => {
+  document.getElementById("status").hidden = true;
+  document.getElementById("ask").hidden = false;
+});
+
+// ----- Page 3: runaway No button -----
 let yesSize = 18;
 function runAway() {
   no.style.position = "fixed";
@@ -70,12 +109,13 @@ no.addEventListener("mouseover", runAway);
 no.addEventListener("touchstart", (e) => { e.preventDefault(); runAway(); });
 no.addEventListener("click", runAway);
 
-// When she clicks Yes
+// ----- Page 3: she clicks Yes -----
 yes.addEventListener("click", () => {
-  document.getElementById("photo").hidden = true;    // hide the GIF
-  document.getElementById("heart").hidden = false;   // show the beating heart
+  document.getElementById("photo").hidden = true;
+  document.getElementById("heart").hidden = false;
   title.textContent = "Yay!! 🎉";
   message.textContent = "You just made me the happiest person today.";
   question.textContent = "";
   buttons.style.display = "none";
+  // the music keeps playing; nothing stops it
 });

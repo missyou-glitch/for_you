@@ -78,6 +78,8 @@ label {
 #error {
   color: #c0334f;
   min-height: 1.2em;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 #heart {
@@ -88,4 +90,26 @@ label {
   margin: 0 auto 16px;
   background: #000;
   border-radius: 16px;
+}
+
+
+#sound {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  margin: 0;
+  padding: 10px 14px;
+  font-size: 20px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(200, 80, 110, 0.3);
+  z-index: 10;
+}
+
+#bf-yes, #bf-no {
+  background: #ff5c8a;
+  color: white;
+}
+
+#bf-no {
+  background: #8fcf9f;
 }

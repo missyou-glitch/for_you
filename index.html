@@ -9,25 +9,43 @@
 <body>
   <main id="card">
 
-    <!-- Step 1: verification -->
+    <!-- Page 1: confirmation -->
     <section id="gate">
       <h1>Hi there 💕</h1>
       <p>This page was made for one special person. Please confirm it's you.</p>
-      <input id="f-name" type="text" placeholder="Nhập tên VD: Nguyễn Văn A" autocomplete="off">
+      <input id="f-name" type="text" placeholder="Your full name" autocomplete="off">
       <label for="f-dob">Date of birth</label>
       <input id="f-dob" type="date">
-      <input id="f-school" type="text" placeholder="Nhập tên trường cấp 3 từng học VD: THPT Chuyên Bắc Ninh" autocomplete="off">
+      <input id="f-school" type="text" placeholder="The old high school we both studied at" autocomplete="off">
       <button id="verify">Confirm</button>
       <p id="error"></p>
     </section>
 
-    <!-- Step 2: the question (hidden until verified) -->
+    <!-- Page 2: boyfriend question -->
+    <section id="status" hidden>
+      <h1>One quick question 🌸</h1>
+      <p>Before I say anything, I want to be respectful of you.</p>
+      <h2>Do you have a boyfriend?</h2>
+      <div>
+        <button id="bf-yes">Yes</button>
+        <button id="bf-no">No</button>
+      </div>
+    </section>
+
+    <!-- Page 2b: apology (only if she says Yes) -->
+    <section id="sorry" hidden>
+      <h1>Thank you for being honest 🌷</h1>
+      <p>I'm sorry for not loving you as you love me at first, now I know that I love you but you already have a boyfriend. I hope you always be happy and all the best will come to you. I am very sorry for taking up your precious time.</p>
+      <p>Take care, and thank you for reading this far. 💕.</p>
+    </section>
+
+ <!-- Page 3: the question (only if she says No) -->
     <section id="ask" hidden>
-    <img src="Love.gif" alt="Loading heart" id="photo">
-    <canvas id="heart" width="260" height="240" hidden></canvas>
-      <h1 id="title">Ummmmm 💕</h1>
+      <img src="Love.gif" alt="Loading heart" id="photo">
+      <canvas id="heart" width="260" height="240" hidden></canvas>
+      <h1 id="title">Hi Her Name 💕</h1>
       <p id="message">I have something I want to ask you...</p>
-      <h2 id="question">May I have a chance to ask you to hang out with me?</h2>
+      <h2 id="question">May I have any chance to invite you to hang out with me?</h2>
       <div id="buttons">
         <button id="yes">Yes 💖</button>
         <button id="no">No</button>
@@ -35,8 +53,12 @@
     </section>
 
   </main>
-  <script src="script.js"></script>
-  <script src="heart.js"></script>
 
+  <audio id="bgm" src="Running Sky.mp3" loop preload="auto"></audio>
+  <audio id="sorrysong" src="Don't Forget.mp3" loop preload="auto"></audio>
+  <button id="sound" hidden>🔊</button>
+
+  <script src="heart.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
