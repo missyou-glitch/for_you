@@ -3,6 +3,7 @@ const SALT = "missyou2011";   // don't change this after generating the hashes
 const EXPECTED_HASHES = [
   "0332ef2bdbe1caaf7b774dc1d1d8ccf15cb1d6d3c24498f835c4fe9cbc9e850b",
   "b5483db77637c443979db7b65a267e4f7973998dbf562fe7fd3cb635ff6d2725",
+  "2a256aea137dc8b59f46d42aeb36dfe2e1d3c798ea27091d0f2843cf8ec562d3", //Test cho dễ
 ];
 
 const yes = document.getElementById("yes");
