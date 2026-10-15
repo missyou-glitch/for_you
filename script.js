@@ -1,3 +1,4 @@
+
 // ===== SETTINGS =====
 const SALT = "missyou2011";
 const EXPECTED_HASH = "f79526b7cc4c17da73be5455baf1f6605b3bf17d931bcbfcc8d4ea543fc72102"; // you'll generate this in step 4
@@ -63,6 +64,8 @@ no.addEventListener("click", runAway);
 
 // Yes
 yes.addEventListener("click", () => {
+  document.getElementById("photo").hidden = true;    // hide the GIF
+  document.getElementById("heart").hidden = false;   // show the beating heart
   title.textContent = "Yay!! 🎉";
   message.textContent = "You just made me the happiest person today.";
   question.textContent = "";
